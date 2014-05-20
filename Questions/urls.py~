@@ -1,0 +1,5 @@
+from django.conf.urls import url, pattern
+
+urlpatterns = ('Questions.views',
+		url(r'^view/(?P<qno>\d+)/$', view_question),
+)

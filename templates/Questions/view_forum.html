@@ -1,0 +1,41 @@
+{% extends "cfaq_base.html" %}
+
+{% block title %}
+	Viewing forum {{ forumname }}
+{% endblock %}
+
+{% block content %}
+	<style>
+		.helptext {
+			color: #350000;
+		}
+	</style>
+	<div class="controls">
+		{% if isloggedin %}
+			<pre><a href="/ask/{{forumname}}">Post a Question</a>   <a href="/account/logout">Log Out</a></pre>
+		{% else %}
+			<pre><a href="/account/login">Login </a>  <a href="/account/register">Sign Up</a></pre>
+		{% endif %}
+	</div>
+	<div id="qlist">
+		{% if success %}
+			{% if questions|length %}
+				<span style="color: #790200">The Questions Available in the forum {{ forumname }} are <br/></span>
+				{% for question in questions %}
+					<pre><a href="/view/{{ forumname }}/{{ question.id }}">{{ forloop.counter}}.{{question.question_tag}}</a><br/></pre>
+				{% endfor %}
+				{% if isloggedin %}
+					<br/><span class="helptext"><blink>No more Questions in this forum.. Please Click on PostQuestion to add a new Question</blink></span>
+				{% else %}
+					<br/><span class="helptext"><blink>No more Questions are available in this forum.. Please click on Login or Sign Up button to Post a new Question</blink></span>
+				{% endif %}
+			{% else %}
+				{% if isloggedin %}
+					<span class="helptext">No Questions added yet.. Please Click on PostQuestion to add a new Question</span>
+				{% else %}
+					<span class="helptext">No Questions are available in this forum.. Please click on Login or Sign Up button to Post a new Question</span>
+				{% endif %}
+			{% endif %}
+		{% endif %}
+	</div>
+{% endblock %}

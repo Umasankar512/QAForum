@@ -1,0 +1,13 @@
+{% extends "cfaq_base.html" %}
+
+{% block title %} All Questions {% endblock %}
+
+{% block content %}
+<table bgcolor="#f30fff">
+	{% for question in questions %}
+	<tr bgcolor="{% cycle 000000,000012 %}">{{ forloop.counter }}
+		<td><a href="{% url 'Questions.views.view_question' question.id %}"><h1 style="color:white;">{{ question.question_tag }}</h1></a></td>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}

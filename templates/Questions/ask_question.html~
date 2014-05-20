@@ -1,0 +1,18 @@
+{% extends "cfaq_base.html" %}
+
+{% block title %} Ask a Question {% endblock %}
+
+{% block content %}
+	{% if not success %}
+		<div class="ask">
+			<form method="post" action="/ask">{% csrf_token %}
+				Question Subject: <input type="text" size="37" name="question_title"/><br/>
+				Question Content: <textarea rows="8" cols="50" name="question_content"></textarea><br/>
+				<input type="submit" name="submit" value="POST"/>
+			</form>
+		</div>
+	{% else %}
+		<h2> Question Posted Successfully </h2><br/>
+		Click <a href="/"> here </a>to see your Question on Index Page
+	{% endif %}
+{% endblock %}

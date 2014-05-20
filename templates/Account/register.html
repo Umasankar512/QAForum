@@ -1,0 +1,20 @@
+{% extends "cfaq_base.html" %}
+
+{% block title %} Registration {% endblock %}
+
+{% block content %}
+	{% if form.erros %}
+		<p class="error">Sorry, that's not a valid Username or Password</p>
+	{% endif %}
+	<div class="register">
+		<br/><span style="color: #350000">{{ message }}</span><br/>
+		<form method="post" action="/account/register"> {% csrf_token %}
+			<input placeholder="Username" type="text" name="username"/><br/><br/>
+			<input placeholder="Enter email address" type="email" name="email_id"/><br/><br/>
+			<input placeholder="Enter your Password" type="password" name="password"/><br/><br/>
+			<input placeholder="Confirm Password" type="password" name="confirm"/><br/><br/><br/>
+			<input type="submit" name="submit" value="Register"/>
+		</form>
+	</div>
+	<span style="color: #450000;position: relative;top: 360px;left: 10px">Already have an Account?<br/>Click <a href="/account/login">Here</a> to Login</span>
+{% endblock %}

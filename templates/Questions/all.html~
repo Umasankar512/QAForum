@@ -1,0 +1,28 @@
+{% extends "cfaq_base.html" %}
+
+{% block title %} All Questions {% endblock %}
+
+{% block content %}
+	{% if islogin %}
+		<td><a href="/ask">Post a Question</a></td>
+		<td><a href="/account/logout">Log Out</a></td></tr>
+	{% else %}
+		<td><a href="/account/login">Login </a></td>
+		<td><a href="/account/register">Sign Up</a></td></tr>
+	{% endif %}
+<table class="outer">
+	Welcome, {{ username }}
+	<h4>The available Questions in our forum are </h4>
+	{% for question in questions %}
+	<tr>
+		<td>
+			<div class="question" bgcolor="{% cycle a2f2f2,ffffff %}">
+			<a href="{% url 'Questions.views.view_question' question.id %}">
+				<span style="color:blue">{{forloop.counter }}.{{ question.question_tag }}</span>
+			</a>
+			</div>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}

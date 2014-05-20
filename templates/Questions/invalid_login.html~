@@ -1,0 +1,5 @@
+
+
+{% block content %}
+	<h2>Your login details are Invalid. Click <a href="account/login">here</a>to loginagain</h2>
+{% endblock %}

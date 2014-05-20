@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html >
+<html>
+	<head>
+		<link rel="stylesheet" href="{% static 'style.css' %}"/>
+		<srcipt type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+		<srcipt type="text/javascript">
+			$(document).ready(function() {
+				$(".edit").click(function() {
+					alert("Hello, World");
+				});
+			});
+		</script>
+		<title> {% block title %} Base {% endblock %} </title>
+	</head>
+	<body>
+		<table border="0" width="100%" id="first">
+			<tr><td>
+				<h1> C-FAQ </h1>
+				<center><a href="{% url 'Questions.views.index' %}">Table of Contents</a></center>
+			</td>
+			{% block content %}
+
+			{% endblock %}
+		</table>
+	</body>
+</html>

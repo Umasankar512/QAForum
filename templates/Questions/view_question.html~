@@ -1,0 +1,66 @@
+{% extends "cfaq_base.html" %}
+{% block title %} Viewing Question {{ question.id }} {% endblock %}
+
+{% block content %}
+	<srcipt type="text/javascript">
+			$(document).ready(function() {
+				$(".edit").click(function() {
+					alert("Hello, World");
+				});
+			});
+	</script>
+	{% if user %}
+		<td> <a href="/account/logout"> Log Out</a></td>
+	{% endif %}
+	<td><a href="/"> Back </a> </td></tr></table>
+	<div class="view_question">
+		<div id="text">{{ question.question_tag }}</div>
+		<div id="text">{{ question.question_text }}<div class="edit">Edit</div><br/> <br/></div>
+		<div id="text">-{{ question.asked_by }}	<span id="time">{{ question.when| timesince }} ago</span></div>
+		<br/><br/>		
+		<h3>{{ question.answer.all|length }} {{ question.answer.all|length|yesno:"Answer,Answer"}}{{ question.answer.all|length|pluralize }}
+				{% for a in question.answer.all %}
+					<div class="answer">
+						<div id="aby">{{ a.answer_by }}-<span id="time">{{ a.when|timesince }} ago</span></div>
+						<div id="text">{{ a.answer_text | wordwrap:"60" }}</div>
+						<div class="likes">
+							{% if user %}
+								{% if user in a.like_by_whom %}
+									Likes: {{ a.likes }} Dislikes: {{ a.dislikes }}
+								{% else %}
+									{% if user in a.dislike_by_whom %}
+										Likes: {{ a.likes }} Dislikes: {{ a.dislikes }}
+									{% else %}
+										{% if user == a.answer_by %}
+											Likes: {{ a.likes }} Dislikes: {{ a.dislikes }}
+										{% else %}
+											<a href="{% url 'Questions.views.like_ans' a.id 1 question.id %}">Like</a> <a href="{% url 'Questions.views.like_ans' a.id 0 question.id %}">Disike</a>
+										{% endif %}
+									{% endif %}	
+								{% endif %}
+							{% else %}
+								Likes: {{ a.likes }} Dislikes: {{ a.dislikes }}
+							{% endif %}
+						</div>
+					</div>
+					<br/>
+				{% endfor %}
+	{% if user %}
+		{% if not ans_sub %}
+			<h6>{{ message }}</h6>
+			<div class="note">
+			<form method="post" action=".">{% csrf_token %}
+				<textarea name="answer" rows="8" cols="75" placeholder="Write your Answer Here"></textarea>
+				<select name="user"><option value="{{ user }}" seledted="true">{{ user }}</option><option value="Anonymous">Anonymous</option>
+				<input type="submit" name="submit" value="Post"/>
+			</form>
+			</div>
+		{% else %}
+			<h2> Thanks for submitting your Answer </h2>
+		{% endif %}
+	{% else %}
+		<h6>Please <a href="/account/login">Sign in</a> or <a href="/account/register"> Register </a> to write your answer</h6>
+	{% endif %} 
+	</div>
+
+{% endblock %}

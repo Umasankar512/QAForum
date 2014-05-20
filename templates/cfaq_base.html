@@ -1,0 +1,37 @@
+<style type="text/css">
+    #first {
+        width: 1309px;
+    }
+</style>
+{% load static %}
+<!DOCTYPE html >
+<html>
+	<head>
+		<link rel="stylesheet" href="{% static 'style.css' %}"/>
+		<script type="text/javascript" src="{% static 'jquery-1.11.0.js' %}"></script>
+		<title> {% block title %} Base {% endblock %} </title>
+	</head>
+	<body bgcolor="#d3e3e2">
+		<table border="0" id="first">
+			<tr>
+				<td style="text-align: center;">
+					<h1> Discussion Forum </h1>
+					{% if forum|length %}
+						|
+						{% for f in forum %}
+							<a href="/view/{{ f.forum_name|capfirst }}">{{ f.forum_name|capfirst }}</a>     |
+						{% endfor %}
+					{% endif %}
+					<hr>
+		{% block content %}
+
+		{% endblock %}
+	</body>
+</html>
+
+
+
+				</td>
+				<br/><br/>
+            </tr>
+        </table>

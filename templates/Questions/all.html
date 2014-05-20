@@ -1,0 +1,23 @@
+{% extends "cfaq_base.html" %}
+
+{% block title %} All Questions {% endblock %}
+
+{% block content %}
+	<div class="controls">
+		{% if islogin %}
+			<pre><a href="/ask">Post a Question</a>   <a href="/account/logout">Log Out</a></pre>
+		{% else %}
+			<pre><a href="/account/login">Login </a>  <a href="/account/register">Sign Up</a></pre>
+		{% endif %}
+	</div>
+<table class="outer">
+	{% if username %}
+		Welcome, {{ username }}
+	{% endif %}
+	{% if questions|length %}
+		
+	{% else %}
+		Currently no available Questions
+	{% endif %}
+</table>
+{% endblock %}

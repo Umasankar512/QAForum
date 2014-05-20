@@ -1,0 +1,26 @@
+from django.db import models
+
+# Create your models here.
+
+class Answer(models.Model):
+	answer_text = models.CharField(max_length=500)
+	answer_by = models.CharField(max_length=25)
+	when = models.DateTimeField(auto_now=True)
+	likes = models.DecimalField(max_digits=5,decimal_places=0)
+	dislikes = models.DecimalField(max_digits=5,decimal_places=0)
+	
+	def __unicode__(self):
+		return self.answer_text
+
+class Question(models.Model):
+	question_tag = models.CharField(max_length=75)
+	question_text = models.CharField(max_length=500)
+	asked_by = models.CharField(max_length=20)
+	when = models.DateTimeField(auto_now=True)
+	answer = models.ManyToManyField(Answer, blank=True)
+	answer_list = []	
+
+	def __unicode__(self):
+		return (self.question_tag)
+
+

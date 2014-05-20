@@ -1,0 +1,13 @@
+{% extends "cfaq_base.html" %}
+
+{% block title %}{% if success %} Successfully Registered {% else %} {% if expired %} Your activation key expired {% endif %} {% endif %}{% endblock %}
+
+{% block content %}
+	{% if success %} 
+		Successfully Registered.. <br/>Please login <a herf="/account/login"> here </a> into your account 
+	{% else %} 
+		{% if expired %} 
+			Your activation key expired <br/> please register again <a href="/account/register"> here
+		{% endif %} 
+	{% endif %}
+{% endblock %}
